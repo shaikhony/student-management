@@ -20,6 +20,7 @@ Route::group([
     Route::crud('teacher', 'TeacherCrudController');
     Route::crud('subject', 'SubjectCrudController');
     Route::crud('course', 'CourseCrudController');
+    Route::get('dashboard', 'DashboardController@index')->name('backpack.dashboard');
 }); // this should be the absolute last line of this file
 
 /**
