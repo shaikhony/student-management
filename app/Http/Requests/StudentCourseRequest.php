@@ -2,10 +2,9 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Teacher;
 use Illuminate\Foundation\Http\FormRequest;
 
-class SubjectRequest extends FormRequest
+class StudentCourseRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,13 +25,9 @@ class SubjectRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'           => 'required|string|max:255', // الاسم مطلوب، نصي، وأقصى حد 255 حرفًا
-            'level'         => 'required', // الحالة يجب أن تكون إما نشطة أو غير نشطة
-            'stage'           => 'required|string|max:100',
+            // 'name' => 'required|min:5|max:255'
         ];
     }
-
-        
 
     /**
      * Get the validation attributes that apply to the request.

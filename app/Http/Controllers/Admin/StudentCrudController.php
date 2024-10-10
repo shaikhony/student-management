@@ -28,7 +28,7 @@ class StudentCrudController extends CrudController
     {
         CRUD::setModel(\App\Models\Student::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/student');
-        CRUD::setEntityNameStrings('student', 'students');
+        CRUD::setEntityNameStrings('الطالب', 'الطلاب');
     }
 
     /**
@@ -117,4 +117,10 @@ class StudentCrudController extends CrudController
         CRUD::field('phone_number')->type('text')->label('رقم الهاتف');
         CRUD::field('status')->type('enum')->label('حالة الطالب');
     }
+
+    protected function setupShowOperation()
+    {
+        $this->setupListOperation();
+    }
+
 }
