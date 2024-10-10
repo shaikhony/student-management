@@ -15,10 +15,9 @@ class Student extends Model
     protected $guarded = ['id'];
     protected $fillable = ['name', 'age', 'country', 'phone_number', 'status'];
 
-    // public function subjects()
-    // {
-    //     return $this->belongsToMany(Subject::class, 'student_courses')
-    //         ->withPivot('payment_status', 'payment_method')->withTimestamps();
-    // }
+    public function courses()
+    {
+        return $this->belongsToMany(Course::class, 'course_student', 'student_id', 'course_id');
+    }
 }
 

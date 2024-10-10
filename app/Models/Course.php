@@ -36,5 +36,10 @@ class Course extends Model
     {
         return $this->belongsTo(Subject::class); // علاقة مع نموذج Subject
     }
+
+    public function students()
+    {
+        return $this->belongsToMany(Student::class, 'course_student', 'course_id', 'student_id');
+    }
 }
 
