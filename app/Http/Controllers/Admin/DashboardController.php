@@ -46,8 +46,10 @@ class DashboardController extends Controller
         $inactive_teacher_percentage = $all_teachers > 0 ? ($inactive_teachers / $all_teachers) * 100 : 0;
 
 
-                    
-            Widget::add([
+
+
+        Widget::add(['type' => 'div', 'class' => 'row','style' => 'margin-top: 70px;', 'content' => [
+            [
                 'type'        => 'progress',
                 'class'       => 'card text-white bg-success mb-2',
                 'value' => '<span style="font-size: 1.5em; color: white; margin-top: 10px; display: block;">' . round($active_percentage) . '%</span>',
@@ -55,10 +57,8 @@ class DashboardController extends Controller
                 'progress'    => $active_percentage, // النسبة المئوية للطلاب النشطين
                 'hint' => '<span style="color: yellow;">عدد الطلاب النشطين : ( ' . $active_students . ' ) من اجمالي ' . $all_students . ' طلاب</span>',
                 'style' => 'background: linear-gradient(to right, yellow ' . $active_percentage . '%, gray ' . $active_percentage . '%);',
-            ]);
-        
-
-            Widget::add([
+            ],
+            [
                 'type'        => 'progress',
                 'class'       => 'card text-white bg-danger mb-2',
                 'value' => '<span style="font-size: 1.5em; color: white; margin-top: 10px; display: block;">' . round($inactive_percentage) . '%</span>',
@@ -66,10 +66,8 @@ class DashboardController extends Controller
                 'progress'    => $inactive_percentage, // النسبة المئوية للطلاب النشطين
                 'hint' => '<span style="color: yellow;">عدد الطلاب غير النشطين : ( ' . $inactive_students . ' ) من اجمالي ' . $all_students . ' طلاب</span>',
                 'style' => 'background: linear-gradient(to right, yellow ' . $inactive_percentage . '%, gray ' . $inactive_percentage . '%);',
-            ]);
-
-
-            Widget::add([
+            ],
+            [
                 'type'        => 'progress',
                 'class'       => 'card text-white bg-warning mb-2',
                 'value' => '<span style="font-size: 1.5em; color: white; margin-top: 10px; display: block;">' . round($suspended_percentage) . '%</span>',
@@ -77,10 +75,9 @@ class DashboardController extends Controller
                 'progress'    => $suspended_percentage, // النسبة المئوية للطلاب النشطين
                 'hint' => '<span style="color: yellow;">عدد الطلاب المنسحبين : ( ' . $suspended_students . ' ) من اجمالي ' . $all_students . ' طلاب</span>',
                 'style' => 'background: linear-gradient(to right, yellow ' . $suspended_percentage . '%, gray ' . $suspended_percentage . '%);',
-            ]);
+            ],
 
-
-            Widget::add([
+            [
                 'type'        => 'progress',
                 'class'       => 'card text-white bg-secondary mb-2',
                 'value' => '<span style="font-size: 1.5em; color: white; margin-top: 10px; display: block;">' . round($prospective_percentage) . '%</span>',
@@ -88,40 +85,37 @@ class DashboardController extends Controller
                 'progress'    => $prospective_percentage, // النسبة المئوية للطلاب النشطين
                 'hint' => '<span style="color: yellow;">عدد الطلاب المحتملين : ( ' . $prospective_students . ' ) من اجمالي ' . $all_students . ' طلاب</span>',
                 'style' => 'background: linear-gradient(to right, yellow ' . $prospective_percentage . '%, gray ' . $prospective_percentage . '%);',
-            ]);
+            ]
+    
+        ],
+    ]);
 
 
 
-            Widget::add([
-                'type'        => 'progress',
-                'class'       => 'card text-white bg-success mb-2',
-                'value' => '<span style="font-size: 1.5em; color: white; margin-top: 10px; display: block;">' . round($active_teacher_percentage) . '%</span>',
-                'description' => '<span style="font-size: 2em;">المعلمون النشطون</span>', // تغيير حجم الخط هنا
-                'progress'    => $active_teacher_percentage, // النسبة المئوية للطلاب النشطين
-                'hint' => '<span style="color: yellow;">عدد المعلمين النشطين : ( ' . $active_teachers . ' ) من اجمالي ' . $all_teachers . ' معلمين</span>',
-                'style' => 'background: linear-gradient(to right, yellow ' . $active_teacher_percentage . '%, gray ' . $active_teacher_percentage . '%);',
-            ]);
+    Widget::add(['type' => 'div', 'class' => 'row','style' => 'margin-top: 23px;', 'content' => [
+        [
+            'type'        => 'progress',
+            'class'       => 'card text-white bg-success mb-2',
+            'value' => '<span style="font-size: 1.5em; color: white; margin-top: 10px; display: block;">' . round($active_teacher_percentage) . '%</span>',
+            'description' => '<span style="font-size: 2em;">المعلمون النشطون</span>', // تغيير حجم الخط هنا
+            'progress'    => $active_teacher_percentage, // النسبة المئوية للطلاب النشطين
+            'hint' => '<span style="color: yellow;">عدد المعلمين النشطين : ( ' . $active_teachers . ' ) من اجمالي ' . $all_teachers . ' معلمين</span>',
+            'style' => 'background: linear-gradient(to right, yellow ' . $active_teacher_percentage . '%, gray ' . $active_teacher_percentage . '%);',
+        ],
+        [
+            'type'        => 'progress',
+            'class'       => 'card text-white bg-danger mb-2',
+            'value' => '<span style="font-size: 1.5em; color: white; margin-top: 10px; display: block;">' . round($inactive_teacher_percentage) . '%</span>',
+            'description' => '<span style="font-size: 2em;">المعلمين غير النشطين</span>', // تغيير حجم الخط هنا
+            'progress'    => $inactive_teacher_percentage, // النسبة المئوية للطلاب النشطين
+            'hint' => '<span style="color: yellow;">عدد المعلمين غير النشطين : ( ' . $inactive_teachers . ' ) من اجمالي ' . $all_teachers . ' معلمين</span>',
+            'style' => 'background: linear-gradient(to right, yellow ' . $inactive_teacher_percentage . '%, gray ' . $inactive_teacher_percentage . '%);',
+        ]
 
-            Widget::add([
-                'type'        => 'progress',
-                'class'       => 'card text-white bg-danger mb-2',
-                'value' => '<span style="font-size: 1.5em; color: white; margin-top: 10px; display: block;">' . round($inactive_teacher_percentage) . '%</span>',
-                'description' => '<span style="font-size: 2em;">المعلمين غير النشطين</span>', // تغيير حجم الخط هنا
-                'progress'    => $inactive_teacher_percentage, // النسبة المئوية للطلاب النشطين
-                'hint' => '<span style="color: yellow;">عدد المعلمين غير النشطين : ( ' . $inactive_teachers . ' ) من اجمالي ' . $all_teachers . ' معلمين</span>',
-                'style' => 'background: linear-gradient(to right, yellow ' . $inactive_teacher_percentage . '%, gray ' . $inactive_teacher_percentage . '%);',
-            ]);
-            
+    ],
+]);
 
 
-            
-            
-
-        
-
-            
-        
-        
 
         return view(backpack_view('dashboard'));
     }
