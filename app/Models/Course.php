@@ -41,5 +41,18 @@ class Course extends Model
     {
         return $this->belongsToMany(Student::class, 'course_student', 'course_id', 'student_id');
     }
+
+     // استخدام حدث saved لتحديث عدد الطلاب
+     protected static function booted()
+     {
+         static::saved(function ($course) {
+             // حساب عدد الطلاب المرتبطين بهذا الكورس
+             $currentStudentsCount = $course->students()->count();
+ 
+             // تحديث حقل number_student في الكورس
+             $course->number_student = $currentStudentsCount;
+             $course->saveQuietly(); // استخدم saveQuietly لتجنب إطلاق حدث saved مرة أخرى
+         });
+     }
 }
 

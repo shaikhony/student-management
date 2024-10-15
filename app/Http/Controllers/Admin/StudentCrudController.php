@@ -98,8 +98,11 @@ class StudentCrudController extends CrudController
 
         CRUD::field('phone_number')->type('text')->label('رقم الهاتف');
         CRUD::field('status')->type('enum')->label('حالة الطالب');
+<<<<<<< HEAD
 
         
+=======
+>>>>>>> fdb457f04c705179b5068aa61fc464eef97cfae3
     }
 
     /**
@@ -127,8 +130,11 @@ class StudentCrudController extends CrudController
         
         CRUD::field('phone_number')->type('text')->label('رقم الهاتف');
         CRUD::field('status')->type('enum')->label('حالة الطالب');
+<<<<<<< HEAD
 
         // إضافة حقل SelectMany لتحديد الكورسات التي يمكن للطالب التسجيل ب // التعامل مع الجدول الوسيط
+=======
+>>>>>>> fdb457f04c705179b5068aa61fc464eef97cfae3
     }
 
     protected function setupShowOperation()
