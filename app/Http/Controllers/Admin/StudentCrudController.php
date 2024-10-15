@@ -53,9 +53,12 @@ class StudentCrudController extends CrudController
         ]);
 
         CRUD::addColumn([
-            'name' => 'country',
-            'type' => 'text',
-            'label' => 'البلد'
+            'name' => 'country_id', // استخدم subject_id هنا
+            'type' => 'select', // استخدم 'relationship' هنا
+            'label' => 'البلد',
+            'entity' => 'country',
+            'model' => 'App\Models\Country',
+            'attribute' => 'country_name', // هنا يجب أن يكون اسم الحقل الذي تريد إظهاره
         ]);
 
         CRUD::addColumn([
@@ -70,15 +73,6 @@ class StudentCrudController extends CrudController
             'label' => 'حالة الطالب'
         ]);
 
-        CRUD::addColumn([
-            'name' => 'courses', 
-            'label' => 'الكورسات المسجلة',
-            'type' => 'select_multiple',
-            'entity' => 'courses', // العلاقة
-            'attribute' => 'name', // عرض اسم الكورس
-            'model' => "App\Models\Course", // موديل الكورسات
-            'pivot' => true, // الجدول الوسيط
-        ]);
     }
 
     /**
@@ -94,17 +88,18 @@ class StudentCrudController extends CrudController
 
         CRUD::field('name')->type('text')->label('الاسم');
         CRUD::field('age')->type('number')->label('العمر');
-        CRUD::field('country')->type('text')->label('البلد');
+
+        CRUD::field('country_id')
+        ->type('select')  // استخدم 'relationship' هنا لعرض العلاقة
+        ->label('البلد')
+        ->entity('country')     // اسم العلاقة التي تعرفها في النموذج
+        ->model('App\Models\Country')  // نموذج البلد
+        ->attribute('country_name');
+
         CRUD::field('phone_number')->type('text')->label('رقم الهاتف');
         CRUD::field('status')->type('enum')->label('حالة الطالب');
 
-        // إضافة حقل SelectMany لتحديد الكورسات التي يمكن للطالب التسجيل بها
-        CRUD::field('courses')->type('select_multiple')
-            ->label('Courses')
-            ->entity('courses') // علاقة الكورسات من الموديل
-            ->attribute('name') // عرض اسم الكورس
-            ->model(\App\Models\Course::class)
-            ->pivot(true); // التعامل مع الجدول الوسيط
+        
     }
 
     /**
@@ -121,17 +116,19 @@ class StudentCrudController extends CrudController
 
         CRUD::field('name')->type('text')->label('الاسم');
         CRUD::field('age')->type('number')->label('العمر');
-        CRUD::field('country')->type('text')->label('البلد');
+
+        CRUD::field('country_id')
+        ->type('select')  // استخدم 'relationship' هنا لعرض العلاقة
+        ->label('البلد')
+        ->entity('country')     // اسم العلاقة التي تعرفها في النموذج
+        ->model('App\Models\Country')  // نموذج البلد
+        ->attribute('country_name');
+
+        
         CRUD::field('phone_number')->type('text')->label('رقم الهاتف');
         CRUD::field('status')->type('enum')->label('حالة الطالب');
 
-        // إضافة حقل SelectMany لتحديد الكورسات التي يمكن للطالب التسجيل بها
-        CRUD::field('courses')->type('select_multiple')
-            ->label('Courses')
-            ->entity('courses') // علاقة الكورسات من الموديل
-            ->attribute('name') // عرض اسم الكورس
-            ->model(\App\Models\Course::class)
-            ->pivot(true); // التعامل مع الجدول الوسيط
+        // إضافة حقل SelectMany لتحديد الكورسات التي يمكن للطالب التسجيل ب // التعامل مع الجدول الوسيط
     }
 
     protected function setupShowOperation()
@@ -139,13 +136,12 @@ class StudentCrudController extends CrudController
         $this->setupListOperation();
         // عرض الكورسات المسجلة في صفحة المعاينة
         CRUD::addColumn([
-            'name' => 'courses',
-            'label' => 'الكورسات المسجلة',
-            'type' => 'select_multiple',
-            'entity' => 'courses',
-            'attribute' => 'name', // عرض اسم الكورس
-            'model' => "App\Models\Course",
-            'pivot' => true,
+            'name' => 'country_id', // استخدم subject_id هنا
+            'type' => 'relationship', // استخدم 'relationship' هنا
+            'label' => 'البلد',
+            'entity' => 'country',
+            'model' => 'App\Models\Country',
+            'attribute' => 'country_name', // هنا يجب أن يكون اسم الحقل الذي تريد إظهاره
         ]);
     }
 }

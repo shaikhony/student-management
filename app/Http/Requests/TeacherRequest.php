@@ -26,7 +26,7 @@ class TeacherRequest extends FormRequest
     {
         return [
             'name' => 'required|min:3|max:100',
-            'special'  =>  'required|min:3|max:30',
+            'spec_id' => 'required|exists:specs,id',
             'note' => 'required|string|max:50',
         ];
     }

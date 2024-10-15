@@ -13,11 +13,16 @@ class Teacher extends Model
 
     protected $table = 'teachers';
     protected $guarded = ['id'];
-    protected $fillable = ['name', 'special', 'note'];
+    protected $fillable = ['name', 'spec_id', 'note'];
 
     public function courses()
     {
         return $this->hasMany(Course::class); // علاقة مع نموذج Course
     }
+
+    public function spec(){
+        return $this->belongsTo(Spec::class);
+    }
+
 }
 

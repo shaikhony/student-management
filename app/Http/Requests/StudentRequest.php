@@ -27,8 +27,8 @@ class StudentRequest extends FormRequest
         return [
             'name' => 'required|min:3|max:100',
             'age'  =>  'required|integer|min:1|max:100',
-            'country' => 'required|string|max:100',
-            'phone_number' => 'required|string|regex:/^[0-9]+$/|min:8|max:15',
+            'country_id' => 'required|exists:countries,id',
+            'phone_number' => 'required|string|regex:/^\+?[0-9]{8,15}$/',
             'status' => 'required|in:نشط,محتمل,متوقف,منسحب',
         ];
     }
@@ -41,7 +41,11 @@ class StudentRequest extends FormRequest
     public function attributes()
     {
         return [
-            //
+            'name' => 'الاسم',
+            'age' => 'العمر',
+            'country_id' => 'البلد',
+            'phone_number' => 'رقم الهاتف',
+            'status' => 'الحالة',
         ];
     }
 
@@ -53,7 +57,13 @@ class StudentRequest extends FormRequest
     public function messages()
     {
         return [
-            //
+            'name.required' => 'الاسم مطلوب',
+            'name.min' => 'الاسم يجب أن يكون على الأقل 3 أحرف',
+            'age.required' => 'العمر مطلوب',
+            'age.integer' => 'العمر يجب أن يكون عدد صحيح',
+            'country_id.required' => 'البلد مطلوب',
+            'phone_number.required' => 'رقم الهاتف مطلوب',
+            'status.required' => 'الحالة مطلوبة',
         ];
     }
 }

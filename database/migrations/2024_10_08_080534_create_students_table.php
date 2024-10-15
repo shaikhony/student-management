@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id(); // رقم فريد لكل طالب
             $table->string('name'); // الاسم النصي
             $table->integer('age'); // العمر كعدد صحيح
-            $table->string('country'); // البلد، قائمة منسدلة
             $table->string('phone_number'); // رقم الهاتف بصيغة دولية
             $table->enum('status', ['نشط', 'محتمل', 'متوقف', 'منسحب']); // حالة الطالب
 
@@ -27,7 +26,8 @@ return new class extends Migration
      * Reverse the migrations.
      */
     public function down(): void
-    {
-        Schema::dropIfExists('students');
-    }
+{
+    Schema::dropIfExists('students');
+}
+
 };

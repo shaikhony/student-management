@@ -13,11 +13,15 @@ class Student extends Model
 
     protected $table = 'students';
     protected $guarded = ['id'];
-    protected $fillable = ['name', 'age', 'country', 'phone_number', 'status'];
+    protected $fillable = ['name', 'age','country_id', 'phone_number', 'status'];
 
     public function courses()
     {
         return $this->belongsToMany(Course::class, 'course_student', 'student_id', 'course_id');
+    }
+
+    public function country(){
+        return $this->belongsTo(Country::class);
     }
 }
 

@@ -47,9 +47,12 @@ class TeacherCrudController extends CrudController
         ]);
 
         CRUD::addColumn([
-            'name' => 'special',
-            'type'=> 'text',
-            'label' => 'التخصص'
+            'name' => 'spec_id', // استخدم subject_id هنا
+            'type' => 'select', // استخدم 'relationship' هنا
+            'label' => 'التخصص',
+            'entity' => 'spec',
+            'model' => 'App\Models\Spec',
+            'attribute' => 'spec_name', // هنا يجب أن يكون اسم الحقل الذي تريد إظهاره
         ]);
 
         CRUD::addColumn([
@@ -75,7 +78,14 @@ class TeacherCrudController extends CrudController
         CRUD::setValidation(TeacherRequest::class);
         
         CRUD::field('name')->type('text')->label('الاسم');
-        CRUD::field('special')->type('text')->label('التخصص');
+        
+        CRUD::field('spec_id')
+        ->type('select')  // استخدم 'relationship' هنا لعرض العلاقة
+        ->label('التخصص')
+        ->entity('spec')     // اسم العلاقة التي تعرفها في النموذج
+        ->model('App\Models\Spec')  // نموذج البلد
+        ->attribute('spec_name');
+
         CRUD::field('note')->type('text')->label('ملاحظة');
 
 
@@ -96,7 +106,14 @@ class TeacherCrudController extends CrudController
         CRUD::setValidation(TeacherRequest::class);
 
         CRUD::field('name')->type('text')->label('الاسم');
-        CRUD::field('special')->type('text')->label('التخصص');
+
+        CRUD::field('spec_id')
+        ->type('select')  // استخدم 'relationship' هنا لعرض العلاقة
+        ->label('التخصص')
+        ->entity('spec')     // اسم العلاقة التي تعرفها في النموذج
+        ->model('App\Models\Spec')  // نموذج البلد
+        ->attribute('spec_name');
+
         CRUD::field('note')->type('text')->label('ملاحظة');
     }
 
