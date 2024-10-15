@@ -25,7 +25,9 @@ class CourseRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+        // الحصول على حالة الكورس الحالي إذا كان الطلب يتعلق بالتعديل
+        $course = $this->route('course'); // في حالة وجود كورس
+        $rules = [
             'name' => 'required|string|max:255',
             'status' => 'required|in:منتهي,متوقف مؤقتاً,نشط',
             'subject_type' => 'required|string|max:255',
@@ -43,6 +45,13 @@ class CourseRequest extends FormRequest
             'teacher_id' => 'required|exists:teachers,id',
             'subject_id' => 'required|exists:subjects,id',
         ];
+
+        // في حالة التعديل، تحقق إذا كانت حالة الكورس "منتهي"
+        if ($course && $course->status === 'منتهي') {
+            $rules['students'] = 'prohibited';
+        }
+
+        return $rules;
     }
 
     /**
@@ -65,7 +74,7 @@ class CourseRequest extends FormRequest
     public function messages()
     {
         return [
-            //
+            'students.prohibited' => 'لا يمكنك إضافة طلاب لأن حالة الكورس منتهية.',
         ];
     }
 }

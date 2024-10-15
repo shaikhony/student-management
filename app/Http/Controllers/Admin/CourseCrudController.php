@@ -80,15 +80,9 @@ class CourseCrudController extends CrudController
         ]);
 
         CRUD::addColumn([
-            'name' => 'max_student',
+            'name' => 'number_student',
             'type' => 'number',
-            'label' => 'أقصى عدد طلاب'
-        ]);
-
-        CRUD::addColumn([
-            'name' => 'min_student',
-            'type' => 'number',
-            'label' => 'أقل عدد طلاب'
+            'label' => 'عدد الطلاب الحالي'
         ]);
 
         CRUD::addColumn([
@@ -172,14 +166,15 @@ class CourseCrudController extends CrudController
         CRUD::field('subject_id')
             ->type('select')
             ->label('المادة');
-    }
 
-    /**
-     * Define what happens when the Update operation is loaded.
-     * 
-     * @see https://backpackforlaravel.com/docs/crud-operation-update
-     * @return void
-     */
+        // إضافة حقل SelectMany لتحديد الطلاب التي يمكن للطالب التسجيل بها
+        CRUD::field('students')->type('select_multiple')
+            ->label('Students')
+            ->entity('students') // علاقة الطلاب من الموديل
+            ->attribute('name') // عرض اسم الطالب
+            ->model(\App\Models\Student::class)
+            ->pivot(true); // التعامل مع الجدول الوسيط
+    }
     protected function setupUpdateOperation()
     {
         CRUD::setValidation(CourseRequest::class);
@@ -228,10 +223,28 @@ class CourseCrudController extends CrudController
         CRUD::field('subject_id')
             ->type('select')
             ->label('المادة');
+
+        // إضافة حقل SelectMany لتحديد الطلاب التي يمكن للطالب التسجيل بها
+        CRUD::field('students')->type('select_multiple')
+            ->label('Students')
+            ->entity('students') // علاقة الطلاب من الموديل
+            ->attribute('name') // عرض اسم الطالب
+            ->model(\App\Models\Student::class)
+            ->pivot(true); // التعامل مع الجدول الوسيط
     }
 
     protected function setupShowOperation()
     {
         $this->setupListOperation();
+        // عرض الطلاب المسجلين في صفحة المعاينة
+        CRUD::addColumn([
+            'name' => 'students',
+            'label' => 'الطلاب المسجلين',
+            'type' => 'select_multiple',
+            'entity' => 'students',
+            'attribute' => 'name', // عرض اسم الطلاب
+            'model' => "App\Models\Students",
+            'pivot' => true,
+        ]);
     }
 }

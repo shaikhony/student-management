@@ -97,14 +97,6 @@ class StudentCrudController extends CrudController
         CRUD::field('country')->type('text')->label('البلد');
         CRUD::field('phone_number')->type('text')->label('رقم الهاتف');
         CRUD::field('status')->type('enum')->label('حالة الطالب');
-
-        // إضافة حقل SelectMany لتحديد الكورسات التي يمكن للطالب التسجيل بها
-        CRUD::field('courses')->type('select_multiple')
-            ->label('Courses')
-            ->entity('courses') // علاقة الكورسات من الموديل
-            ->attribute('name') // عرض اسم الكورس
-            ->model(\App\Models\Course::class)
-            ->pivot(true); // التعامل مع الجدول الوسيط
     }
 
     /**
@@ -124,14 +116,6 @@ class StudentCrudController extends CrudController
         CRUD::field('country')->type('text')->label('البلد');
         CRUD::field('phone_number')->type('text')->label('رقم الهاتف');
         CRUD::field('status')->type('enum')->label('حالة الطالب');
-
-        // إضافة حقل SelectMany لتحديد الكورسات التي يمكن للطالب التسجيل بها
-        CRUD::field('courses')->type('select_multiple')
-            ->label('Courses')
-            ->entity('courses') // علاقة الكورسات من الموديل
-            ->attribute('name') // عرض اسم الكورس
-            ->model(\App\Models\Course::class)
-            ->pivot(true); // التعامل مع الجدول الوسيط
     }
 
     protected function setupShowOperation()
