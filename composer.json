@@ -29,6 +29,7 @@
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
         }
+        
     },
     "autoload-dev": {
         "psr-4": {
@@ -62,8 +63,16 @@
         "allow-plugins": {
             "pestphp/pest-plugin": true,
             "php-http/discovery": true
+        },
+        "http-basic": {
+        "backpackforlaravel.com": {
+            "username": "mhdadnanalhafni97313780",
+            "password": "n3XvPIPn86E9"
         }
+    }
+    
     },
+    
     "minimum-stability": "stable",
     "prefer-stable": true
 }
